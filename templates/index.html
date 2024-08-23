@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Maintenance</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .word-art {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2a79d4;
+            text-shadow: 2px 2px 4px #000000;
+        }
+        .animated-result {
+            animation: bounceIn 1.5s;
+        }
+        .chart-container {
+            display: none;
+            margin-top: 20px;
+            position: relative;
+            height: 400px;
+            width: 70%;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 15px;
+            background: #f9f9f9;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .ai-analysis-icon {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .ai-analysis-popup {
+            display: none;
+            position: fixed;
+            bottom: 60px;
+            right: 10px;
+            background-color: #f9f9f9;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 15px;
+            width: 300px;
+            z-index: 1000;
+        }
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="word-art animate__animated animate__fadeInDown">Predictive Maintenance</h2>
+        <form id="predictForm">
+            <div class="form-group">
+                <label for="type">Product Type</label>
+                <select class="form-control" id="type" name="type" required>
+                    <option value="L">L</option>
+                    <option value="M">M</option>
+                    <option value="H">H</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="air_temperature">Air Temperature (K)</label>
+                <input type="number" class="form-control" id="air_temperature" name="air_temperature" step="0.1" min="290" max="310" required>
+            </div>
+            <div class="form-group">
+                <label for="process_temperature">Process Temperature (K)</label>
+                <input type="number" class="form-control" id="process_temperature" name="process_temperature" step="0.1" min="290" max="320" required>
+            </div>
+            <div class="form-group">
+                <label for="rotational_speed">Rotational Speed (rpm)</label>
+                <input type="number" class="form-control" id="rotational_speed" name="rotational_speed" min="1000" max="3000" required>
+            </div>
+            <div class="form-group">
+                <label for="torque">Torque (Nm)</label>
+                <input type="number" class="form-control" id="torque" name="torque" step="0.1" min="0" max="100" required>
+            </div>
+            <div class="form-group">
+                <label for="tool_wear">Tool Wear (min)</label>
+                <input type="number" class="form-control" id="tool_wear" name="tool_wear" min="0" max="300" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+        <div id="result" class="mt-4"></div>
+    </div>
+    <div class="chart-container">
+        <canvas id="chart"></canvas>
+    </div>
+    <div class="ai-analysis-icon" id="ai-icon">🤖</div>
+    <div class="ai-analysis-popup" id="ai-analysis">
+        <h5 class="emoji">🤖 AI Analysis:</h5>
+        <div id="ai-result"></div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
